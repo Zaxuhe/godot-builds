@@ -17,14 +17,6 @@ environment:
   ANGLE_SRC_PATH: C:\projects\godot-builds\angle
   matrix:
     - GD_PLATFORM: windows
-      TOOLS: yes
-      TARGET: release_debug
-      ARCH: amd64
-    - GD_PLATFORM: windows
-      TOOLS: yes
-      TARGET: release_debug
-      ARCH: x86
-    - GD_PLATFORM: windows
       TOOLS: no
       TARGET: release
       ARCH: amd64
@@ -88,12 +80,3 @@ build_script:
   - for /f %%p in ('dir /b ..\patches') do git apply ..\patches\%%p
   - git rev-parse HEAD
   - scons platform=%GD_PLATFORM% target=%TARGET% tools=%TOOLS% progress=no warnings=no verbose=no gdnative_wrapper=yes
-
-deploy:
-  description: 'Godot binaries deployed by Travis CI and AppVeyor'
-  provider: GitHub
-  auth_token:
-    secure: DYTTAkQFPIDq2YL6hPMOttlHdJ9ZL6dYdOtGFIEneO8BTYx6keJRvewsdzgP2QGA
-  artifact: GodotBinary, GodotGDNativeWrapper
-  on:
-    appveyor_repo_tag: true
